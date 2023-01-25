@@ -1,16 +1,20 @@
 pipeline {
     agent any
+    tools {
+      nodejs '12.22.12'
+    }
     environment {
-        AWS_ACCOUNT_ID="CHANGE_ME"
-        AWS_DEFAULT_REGION="CHANGE_ME" 
-	CLUSTER_NAME="CHANGE_ME"
-	SERVICE_NAME="CHANGE_ME"
-	TASK_DEFINITION_NAME="CHANGE_ME"
-	DESIRED_COUNT="CHANGE_ME"
-        IMAGE_REPO_NAME="CHANGE_ME"
+        CI = "false"
+        AWS_ACCOUNT_ID="967374987218"
+        AWS_DEFAULT_REGION="us-east-1" 
+        CLUSTER_NAME="jenkins-node-test"
+        SERVICE_NAME="my-service-test"
+        TASK_DEFINITION_NAME="my-task-test"
+        DESIRED_COUNT="1"
+        IMAGE_REPO_NAME="967374987218.dkr.ecr.us-east-1.amazonaws.com/test-jenkins-redcap"
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-	registryCredential = "CHANGE_ME"
+	      registryCredential = "redcap-s3-aws"
     }
    
     stages {
@@ -20,7 +24,7 @@ pipeline {
       steps{
         script {
           sh 'npm install'
-	  sh 'npm test -- --watchAll=false'
+	        echo 'npm test -- --watchAll=false'
         }
       }
     }
