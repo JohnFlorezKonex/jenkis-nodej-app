@@ -19,5 +19,5 @@
              "FARGATE"
     ],
     "networkMode": "awsvpc",
-    "executionRoleArn": ROLE_ARN 
+    "executionRoleArn": "arn:aws:iam::967374987218:role/ecsTaskExecutionRole"
 }
