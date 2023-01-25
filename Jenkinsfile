@@ -33,7 +33,12 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+          //dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+          REPO_NAME = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"  
+          sh "pwd"
+          sh "ls"
+          sh "docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
+          sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPO_NAME}"
         }
       }
     }
@@ -42,9 +47,12 @@ pipeline {
     stage('Pushing to ECR') {
      steps{  
          script {
-			docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
-                    	dockerImage.push()
-                	}
+            /*docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
+                dockerImage.push()
+            }*/
+            REPO_NAME = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"  
+            sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com" 
+            sh "docker push ${REPO_NAME}"
          }
         }
       }
@@ -53,7 +61,7 @@ pipeline {
      steps{
             withAWS(credentials: registryCredential, region: "${AWS_DEFAULT_REGION}") {
                 script {
-			sh './script.sh'
+			              sh './script.sh'
                 }
             } 
         }
