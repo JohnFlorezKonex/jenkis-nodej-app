@@ -24,7 +24,7 @@ pipeline {
       steps{
         script {
           sh 'npm install'
-	        echo 'npm test -- --watchAll=false'
+	        sh 'npm test -- --watchAll=false'
         }
       }
     }
