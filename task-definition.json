@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "image": "IMAGE_REPO:BUILD_NUMBER",
-            "name": NAME,
+            "name": "back-security",
 	    "essential": true,
             "portMappings": [
                 {
