@@ -14,7 +14,6 @@ pipeline {
         IMAGE_REPO_NAME="967374987218.dkr.ecr.us-east-1.amazonaws.com/test-backend-app"
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        PORT = "3000"
 	      registryCredential = "redcap-s3-aws"
     }
    
