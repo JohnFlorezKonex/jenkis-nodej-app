@@ -3,7 +3,7 @@ var http = require('http');
 var server = http.createServer(function(request, response) {
 
     response.writeHead(200, {"Content-Type": "text/plain"});
-    response.end("Prueba Funcional 2 ECS Jenkins 30-01-2023");
+    response.end("Actualizando Despliegue a ECS");
 
 });
 
