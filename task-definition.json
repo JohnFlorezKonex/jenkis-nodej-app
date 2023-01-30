@@ -4,6 +4,8 @@
         {
             "image": "IMAGE_REPO:BUILD_NUMBER",
             "name": NAME,
+            "cpu": 256,
+            "memoryReservation": 512,
 	        "essential": true,
             "portMappings": [
                 {
