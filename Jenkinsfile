@@ -8,11 +8,11 @@ pipeline {
         AWS_ACCOUNT_ID="967374987218"
         AWS_DEFAULT_REGION="us-east-1" 
         CLUSTER_NAME="neat-qa"
-        SERVICE_NAME="back_uploads"
-        TASK_DEFINITION_NAME="back_uploads"
+        SERVICE_NAME="back_altenar"
+        TASK_DEFINITION_NAME="back_altenar"
         DESIRED_COUNT="1"
         IMAGE_REPO_NAME="967374987218.dkr.ecr.us-east-1.amazonaws.com/neat-app-qa"
-        IMAGE_TAG="back_uploads"
+        IMAGE_TAG="back_altenar"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 	      registryCredential = "redcap-s3-aws"
     }
@@ -21,7 +21,7 @@ pipeline {
       // Tests
       stage('Unit Tests') {
         steps{
-            sh 'npm install'
+            sh 'npm install --force --legacy-peer-deps '
             echo 'npm test -- --watchAll=false'
         }
       }

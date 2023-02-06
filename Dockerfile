@@ -17,7 +17,7 @@ RUN npm install
 #Copy the app
 COPY . ./
 
-EXPOSE 8895
+EXPOSE 8894
 
 #Start the app
 CMD ["node", "./src/server.js"]
