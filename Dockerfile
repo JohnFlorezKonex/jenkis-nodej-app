@@ -7,9 +7,6 @@ WORKDIR /app
 #Set PATH /app/node_modules/.bin
 ENV PATH /app/node_modules/.bin:$PATH
 
-#Copy .env_qa as .env
-COPY .env_qa /app/.env
-
 #Copy package.json in the image
 COPY package.json ./
 
