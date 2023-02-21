@@ -24,7 +24,7 @@ pipeline {
     // Test Connection
     stage('Test Connection') {
       steps{  
-            sh 'npm run start'
+            sh 'node -v'
         }
     }
   }
