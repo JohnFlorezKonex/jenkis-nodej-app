@@ -13,7 +13,7 @@ pipeline {
     stage('NPM Login') {
       steps{
           echo "${env.NPM_TOKEN}"
-          sh 'echo //registry.npmjs.org/:_authToken=${env.NPM_TOKEN} > .npmrc'
+          sh "echo //registry.npmjs.org/:_authToken=${env.NPM_TOKEN} > .npmrc"
       }
     }
     // Install Dependencies
