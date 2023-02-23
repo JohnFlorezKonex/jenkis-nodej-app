@@ -9,18 +9,10 @@ pipeline {
       NPM_CONFIG_CACHE = 'npm-cache'
   }
   stages {
-    stage('TEST npm whoami') {
-    withCredentials([string(
-                credentialsId: 'npm-token',
-                variable: 'NPM_TOKEN')]) {
-        sh "echo //registry.npmjs.org/:_authToken=${env.NPM_TOKEN} > .npmrc"
-        sh 'npm whoami'
-        sh 'rm .npmrc'
-      }
-    }
     // Install Dependencies
     stage('Install Dependencies') {
       steps{
+          echo "${env.NPM_TOKEN}"
           sh 'npm install'
       }
     }
