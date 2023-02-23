@@ -9,10 +9,16 @@ pipeline {
       NPM_CONFIG_CACHE = 'npm-cache'
   }
   stages {
+     // NPM Login
+    stage('NPM Login') {
+      steps{
+          echo "${env.NPM_TOKEN}"
+          sh '//registry.npmjs.org/:_authToken=${env.NPM_TOKEN} > .npmrc'
+      }
+    }
     // Install Dependencies
     stage('Install Dependencies') {
       steps{
-          echo "${env.NPM_TOKEN}"
           sh 'npm install'
       }
     }
@@ -26,6 +32,7 @@ pipeline {
     stage('Test Connection') {
       steps{  
             sh 'node -v'
+            sh 'rm .npmrc'
         }
     }
   }
